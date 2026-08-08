@@ -63,9 +63,12 @@ def strip_shortcodes(text: str) -> str:
         text,
     )
  
-    # Case 2: remove HTML comments used as Hugo section markers, e.g. <!-- overview -->
-    text = re.sub(r"<!--\s*\w+\s*-->", "", text)
- 
+    # Case 2: remove HTML comments entirely — covers both short Hugo section
+    # markers like <!-- overview --> AND long embedded content like Mermaid
+    # diagram links (<!-- https://mermaid-js.github.io/...#pako:xyz... -->),
+    # which can span hundreds of characters and pollute chunking/BM25 if left in.
+    text = re.sub(r"<!--[\s\S]*?-->", "", text)
+    
     # Case 2b: known heading shortcodes -> replace with readable text so we
     # don't leave an empty "## " header after stripping.
     known_headings = {
