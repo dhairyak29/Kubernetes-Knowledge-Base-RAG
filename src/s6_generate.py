@@ -15,8 +15,9 @@ import sys
 from dotenv import load_dotenv
 from groq import Groq
 
-from s5_retrieve import retrieve, format_for_prompt
-from hybrid_search import hybrid_search
+from src.s5_retrieve import retrieve, format_for_prompt
+# from hybrid_search import hybrid_search
+from src.reranker import retrieve_and_rerank
 
 load_dotenv()
  
@@ -54,7 +55,7 @@ def generate_answer(query: str, top_k: int = TOP_K) -> dict:
     the answer along with the chunks used, so callers can display citations.
     """
 
-    chunks = hybrid_search(query=query, top_k=top_k)
+    chunks = retrieve_and_rerank(query=query, top_k=top_k)
 
     if not chunks:
         return{

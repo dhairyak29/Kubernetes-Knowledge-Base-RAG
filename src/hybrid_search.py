@@ -16,8 +16,8 @@ Usage (standalone test):
 
 import sys
  
-from s5_retrieve import retrieve, RetrievedChunk, DEFAULT_TOP_K
-from bm25_retrieve import keyword_retrieve
+from src.s5_retrieve import retrieve, RetrievedChunk, DEFAULT_TOP_K
+from src.bm25_retrieve import keyword_retrieve
  
 RRF_K = 60           # standard damping constant for Reciprocal Rank Fusion
 CANDIDATE_POOL = 20  # how many results to pull from EACH method before merging

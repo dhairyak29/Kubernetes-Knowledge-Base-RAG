@@ -15,7 +15,7 @@ Usage (standalone test):
 """
 
 
-from s5_retrieve import DEFAULT_TOP_K, RetrievedChunk, CHROMA_PERSIST_DIR, COLLECTION_NAME
+from src.s5_retrieve import DEFAULT_TOP_K, RetrievedChunk, CHROMA_PERSIST_DIR, COLLECTION_NAME
 import re
 from rank_bm25 import BM25Okapi
 import sys
